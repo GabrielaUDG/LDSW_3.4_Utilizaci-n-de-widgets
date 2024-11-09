@@ -10,61 +10,66 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Welcome to Flutter',
+      title: 'LDSW App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Welcome to Flutter'),
+      home: const HomeScreen(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Hello World',
-              style: TextStyle(fontSize: 24),
+      body: Stack(
+        children: [
+          // Imagen de fondo con un filtro de opacidad
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/background.jpg"), // Asegúrate de agregar esta imagen en assets
+                fit: BoxFit.cover,
+              ),
             ),
-            Row(
+            child: Container(
+              color: Colors.black.withOpacity(0.5), // Añadido un filtro negro con opacidad
+            ),
+          ),
+          // Contenido sobre la imagen de fondo
+          Center(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Icon(Icons.star, color: Colors.amber),
-                Text(" Star Widget"),
-              ],
-            ),
-            Stack(
-              alignment: Alignment.center,
               children: [
-                Container(
-                  width: 100,
-                  height: 100,
-                  color: Colors.blue[100],
+                const Icon(
+                  Icons.movie, // Icono que representa la app
+                  size: 80,
+                  color: Colors.green,
                 ),
-                const Text('Stacked Text'),
+                const SizedBox(height: 20),
+                const Text(
+                  'Bienvenido a LDSW App', // Nombre de la app
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white, // Cambié el color a blanco para mejor visibilidad
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  'Hello World', // Mensaje de bienvenida
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.white, // Cambié el color a blanco
+                  ),
+                ),
               ],
             ),
-            Container(
-              padding: const EdgeInsets.all(20),
-              margin: const EdgeInsets.only(top: 20),
-              color: Colors.blue[200],
-              child: const Text("Container with padding and margin"),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
